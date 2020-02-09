@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<head>
+    <title>OSRS Teleport Map</title>
+    <style>
+        /* https://stackoverflow.com/questions/1664785/resize-html5-canvas-to-fit-window */
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+        }
+        canvas {
+            display: block;
+        }
+        #dialog {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            background-color: white;
+            border: solid black 1px;
+            padding: 4px;
+            display: none;
+            /* dynamic elements: display, top, left */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mainCanvas">Interactive map of Oldschool Runescape teleportation locations.</canvas>
+
+    <img id="mapImg" src="file:///C:/Users/Michael/Desktop/git/rs-tele-map/Old_School_RuneScape_world_map.png" style="display: none;">
+
+    <div id="dialog">
+        <div id="dialogText">
+            Hello world
+        </div>
+        <button id="dialogCloseButton">Close</button>
+    </div>
+
+    <script>
+        (function() {
+            const scaleIncrements = 0.05;
+            const scaleMin = 0.1;
+            const poiRadius = 10;
+
+            var canvas = document.getElementById('mainCanvas');
+            var ctx = canvas.getContext('2d');
+            var mapImg = document.getElementById('mapImg');
+
+            var dialog = document.getElementById('dialog');
+            var dialogText = document.getElementById('dialogText');
+            var dialogCloseButton = document.getElementById('dialogCloseButton');
+
+            var mapImgLoaded = false;
+
+            var isDragging = false;
+            var mapX = 0;
+            var mapY = 0;
+            var mapScale = 1;
+
+            var prevMouseX = 0;
+            var prevMouseY = 0;
+
+            /* https://oldschool.runescape.wiki/w/Teleportation */
+            var poi = [
+                {
+                    name: 'Ectophial (Item)\n\nMust complete Ghosts Ahoy',
+                    x: 7520,
+                    y: 1732,
+                    color: 'yellow'
+                },
+                {
+                    name: 'Explorer\'s Ring',
+                    x: 5708,
+                    y: 2409,
+                    color: 'yellow'
+                },
+                {
+                    name: 'Lumbridge Home Teleport',
+                    x: 6243,
+                    y: 2632,
+                    color: 'aqua'
+                },
+                {
+                    name: 'Varrock Teleport (Spell)\n\nRequires 25 Magic',
+                    x: 6182,
+                    y: 2000,
+                    color: 'aqua'
+                },
+                {
+                    name: 'Lumbridge Teleport',
+                    x: 6212,
+                    y: 2634,
+                    color: 'aqua'
+                },
+                {
+                    name: 'Falador Teleport',
+                    x: 5436,
+                    y: 2148,
+                    color: 'aqua'
+                },
+                {
+                    name: 'Teleport to House (Rimmington)',
+                    x: 5400,
+                    y: 2614,
+                    color: 'blue'
+                },
+                {
+                    name: 'Teleport to House (Taverley)',
+                    x: 5215,
+                    y: 1894,
+                    color: 'blue'
+                },
+                {
+                    name: 'Teleport to House (Pollnivneach)',
+                    x: 6561,
+                    y: 3287,
+                    color: 'blue'
+                },
+                {
+                    name: 'Teleport to House (Yanille)',
+                    x: 4176,
+                    y: 2998,
+                    color: 'blue'
+                },
+                {
+                    name: 'Teleport to House (Brimhaven)',
+                    x: 4810,
+                    y: 2756,
+                    color: 'blue'
+                },
+                {
+                    name: 'Teleport to House (Hosidius)',
+                    x: 1768,
+                    y: 1736,
+                    color: 'blue'
+                },
+                {
+                    name: 'Teleport to House (Fremennik Province)',
+                    x: 4553,
+                    y: 1394,
+                    color: 'blue'
+                },
+                {
+                    name: 'Teleport to House (Prifddinas)',
+                    x: 3183,
+                    y: 2308,
+                    color: 'blue'
+                },
+                {
+                    name: 'Camelot Teleport',
+                    x: 4818,
+                    y: 1862,
+                    color: 'aqua'
+                },
+                {
+                    name: 'Ardougne Teleport',
+                    x: 4528,
+                    y: 2366,
+                    color: 'aqua'
+                },
+                {
+                    name: 'Watchtower Teleport',
+                    x: 4186,
+                    y: 2935,
+                    color: 'aqua'
+                },
+                {
+                    name: 'Trollheim Teleport',
+                    x: 5220,
+                    y: 1251,
+                    color: 'aqua'
+                },
+                {
+                    name: 'Ape Atoll Teleport',
+                    x: 4942,
+                    y: 3927,
+                    color: 'aqua'
+                },
+                {
+                    name: 'Kourend Teleport',
+                    x: 1431,
+                    y: 1268,
+                    color: 'aqua'
+                },
+                {
+                    name: 'Home Teleport',
+                    x: 5822,
+                    y: 1832,
+                    color: 'purple'
+                },
+                {
+                    name: 'Paddewwa Telport',
+                    x: 5828,
+                    y: 1873,
+                    color: 'purple'
+                },
+                {
+                    name: 'Senntisten Teleport',
+                    x: 6606,
+                    y: 2061,
+                    color: 'purple'
+                },
+                {
+                    name: 'Kharyll Teleport',
+                    x: 7068,
+                    y: 1775,
+                    color: 'purple'
+                },
+                {
+                    name: 'Lassar Teleport',
+                    x: 5564,
+                    y: 1859,
+                    color: 'purple'
+                },
+                {
+                    name: 'Dareeyak Teleport',
+                    x: 5465,
+                    y: 1205,
+                    color: 'purple'
+                },
+                {
+                    name: 'Carrallangar Teleport',
+                    x: 6015,
+                    y: 1295,
+                    color: 'purple'
+                },
+                {
+                    name: 'Demonic Ruins',
+                    x: 6413,
+                    y: 629,
+                    color: 'purple'
+                },
+                {
+                    name: 'Ghorrock Teleport',
+                    x: 5458,
+                    y: 670,
+                    color: 'purple'
+                }
+            ];
+
+            function draw() {
+                ctx.fillStyle = 'black';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                if (mapImgLoaded) {
+                    // TODO: Profile whether it makes sense to only draw what the user sees VS everything
+                    ctx.drawImage(mapImg, mapX, mapY, mapImg.width * mapScale, mapImg.height * mapScale);
+                }
+
+                poi.forEach(item => {
+                    ctx.fillStyle = item.color;
+                    ctx.beginPath();
+                    ctx.arc(item.x * mapScale + mapX, item.y * mapScale + mapY, poiRadius, 0, 2 * Math.PI);
+                    ctx.fill();
+                });
+            }
+
+            function onResize(e) {
+                canvas.width  = window.innerWidth;
+                canvas.height = window.innerHeight;
+                draw();
+            }
+
+            window.addEventListener('resize', onResize, false);
+            onResize();
+
+            mapImg.addEventListener('load', e => {
+                mapImgLoaded = true;
+                draw();
+            });
+
+            dialogCloseButton.addEventListener('click', e => dialog.style.display = 'none');
+
+            canvas.addEventListener('mousedown', e => {
+                isDragging = true
+                prevMouseX = e.clientX;
+                prevMouseY = e.clientY;
+
+                console.log("clickX=" + ((mapX - e.clientX) / -mapScale) + " clickY=" + ((mapY - e.clientY) / -mapScale));
+            });
+            canvas.addEventListener('mouseup', e => isDragging = false);
+            canvas.addEventListener('mouseleave', e => isDragging = false);
+            canvas.addEventListener('mousemove', e => {
+                if (isDragging) {
+                    var deltaX = e.clientX - prevMouseX;
+                    var deltaY = e.clientY - prevMouseY;
+                    prevMouseX = e.clientX;
+                    prevMouseY = e.clientY;
+
+                    mapX += deltaX;
+                    mapY += deltaY;
+
+                    draw();
+                } else {
+                    poi.forEach(item => {
+                        var itemX = item.x * mapScale + mapX;
+                        var itemY = item.y * mapScale + mapY;
+
+                        if (e.clientX > itemX - poiRadius && e.clientX < itemX + poiRadius && e.clientY > itemY - poiRadius && e.clientY < itemY + poiRadius) {
+                            dialog.style.top = e.clientY + 'px';
+                            dialog.style.left = e.clientX + 'px';
+                            dialogText.innerText = item.name;
+                            dialog.style.display = 'block';
+                        }
+                    })
+                }
+            });
+            canvas.addEventListener('wheel', e => {
+                var oldMapScale = mapScale;
+
+                mapScale += scaleIncrements * -e.deltaY;
+                if (mapScale <= scaleMin) {
+                    mapScale = scaleMin;
+                }
+
+                mapX -= ((mapX - e.clientX) / oldMapScale) * (scaleIncrements * e.deltaY);
+                mapY -= ((mapY - e.clientY) / oldMapScale) * (scaleIncrements * e.deltaY);
+
+                draw();
+            });
+        })();
+    </script>
+</body>
