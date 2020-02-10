@@ -7,6 +7,7 @@
             width: 100%;
             height: 100%;
             margin: 0px;
+            font-family: sans-serif;
         }
         canvas {
             display: block;
@@ -21,6 +22,9 @@
             display: none;
             /* dynamic elements: display, top, left */
         }
+        #dialog > p, #dialog > div > p {
+            margin-top: 0px;
+        }
     </style>
 </head>
 <body>
@@ -28,10 +32,8 @@
 
     <img id="mapImg" src="Old_School_RuneScape_world_map.png" style="display: none;">
 
-    <div id="dialog">
-        <div id="dialogText">
-            Hello world
-        </div>
+    <!-- it is important that there is no space between the div and p elements so that dialog.firstChild is not some random text -->
+    <div id="dialog"><p>Hello world</p>
         <button id="dialogCloseButton">Close</button>
     </div>
 
@@ -46,7 +48,6 @@
             var mapImg = document.getElementById('mapImg');
 
             var dialog = document.getElementById('dialog');
-            var dialogText = document.getElementById('dialogText');
             var dialogCloseButton = document.getElementById('dialogCloseButton');
 
             var mapImgLoaded = false;
@@ -59,13 +60,50 @@
             var prevMouseX = 0;
             var prevMouseY = 0;
 
+            function makeAnchor(link, text) {
+                var anchor = document.createElement('a');
+                anchor.href = link;
+                // TODO: anchor.target
+                anchor.appendChild(document.createTextNode(text));
+                return anchor;
+            }
+
+            function makeWikiAnchor(text) {
+                const wikiBase = 'https://oldschool.runescape.wiki/w/';
+                return makeAnchor(wikiBase + text, text);
+            }
+
+            function makeImg(src) {
+                var img = document.createElement('img');
+                img.src = src;
+                // TODO: alt text
+                return img;
+            }
+
+            function makeP(text) {
+                var p = document.createElement('p');
+                p.appendChild(document.createTextNode(text));
+                return p;
+            }
+
             /* https://oldschool.runescape.wiki/w/Teleportation */
             var poi = [
                 {
-                    name: 'Ectophial (Item)\n\nMust complete Ghosts Ahoy',
+                    name: 'Ectophial',
                     x: 7520,
                     y: 1732,
-                    color: 'yellow'
+                    color: 'yellow',
+                    renderTooltip: () => {
+                        var div = document.createElement('div');
+                        var title = document.createElement('p');
+
+                        title.appendChild(makeImg('https://oldschool.runescape.wiki/images/b/bc/Ectophial.png'));
+                        title.appendChild(makeWikiAnchor('Ectophial'));
+                        div.appendChild(title);
+
+                        div.appendChild(makeP('Requires completing Ghosts Ahoy'));
+                        return div;
+                    }
                 },
                 {
                     name: 'Explorer\'s Ring',
@@ -83,7 +121,15 @@
                     name: 'Varrock Teleport (Spell)\n\nRequires 25 Magic',
                     x: 6182,
                     y: 2000,
-                    color: 'aqua'
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        var div = document.createElement('div');
+                        var title = document.createElement('p');
+                        title.appendChild(makeWikiAnchor('Varrock Teleport'))
+                        div.appendChild(title);
+                        div.appendChild(makeP('Requires 25 magic'))
+                        return div;
+                    }
                 },
                 {
                     name: 'Lumbridge Teleport',
@@ -302,8 +348,18 @@
                         if (e.clientX > itemX - poiRadius && e.clientX < itemX + poiRadius && e.clientY > itemY - poiRadius && e.clientY < itemY + poiRadius) {
                             dialog.style.top = e.clientY + 'px';
                             dialog.style.left = e.clientX + 'px';
-                            dialogText.innerText = item.name;
                             dialog.style.display = 'block';
+
+                            /* https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript */
+                            if ('renderTooltip' in item) {
+                                console.log(dialog.firstChild);
+                                dialog.firstChild.remove();
+                                dialog.insertBefore(item.renderTooltip(), dialog.firstChild);
+                            } else {
+                                console.log(dialog.firstChild);
+                                dialog.firstChild.remove();
+                                dialog.insertBefore(makeP(item.name), dialog.firstChild);
+                            }
                         }
                     })
                 }
