@@ -10,7 +10,7 @@ View online at https://footballhead.github.io/osrs-tele-map/
 
 ## Usage
 
-Loading `index.html` in your browser (or visit https://footballhead.github.io/osrs-tele-map/).
+Load `index.html` in your browser (or visit https://footballhead.github.io/osrs-tele-map/).
 
 Click and drag with the mouse to move around. Scroll the mouse wheel to zoom in/out. Hover over a colored dot to get details. Tooltips can be manually closed using the Close button.
 
