@@ -90,8 +90,12 @@
             function imgRune(rune) {
                 switch (rune.toLowerCase()) {
                     case 'air': return img('https://oldschool.runescape.wiki/images/b/bf/Air_rune.png');
+                    case 'earth': return img('https://oldschool.runescape.wiki/images/d/d2/Earth_rune.png');
                     case 'fire': return img('https://oldschool.runescape.wiki/images/a/a2/Fire_rune.png');
                     case 'law': return img('https://oldschool.runescape.wiki/images/f/f6/Law_rune.png');
+                    case 'soul': return img('https://oldschool.runescape.wiki/images/9/9b/Soul_rune.png');
+                    case 'water': return img('https://oldschool.runescape.wiki/images/d/d1/Water_rune.png');
+                    case 'banana': return img('https://oldschool.runescape.wiki/images/6/69/Banana.png');
                 }
             }
 
@@ -117,6 +121,15 @@
                 return div;
             }
 
+            function teleToHouseTemplate(loc) {
+                return div(
+                    p(img('https://oldschool.runescape.wiki/images/8/88/Teleport_to_House.png'), aWiki('Teleport to House')),
+                    p(text('Requires a house in '), a('https://oldschool.runescape.wiki/w/Player-owned_house', loc)),
+                    p(text('Requires 40 Magic')),
+                    p(runeReq('air', 1), runeReq('earth', 1), runeReq('law', 1))
+                );
+            }
+
             /* https://oldschool.runescape.wiki/w/Teleportation */
             var poi = [
                 {
@@ -135,16 +148,28 @@
                     name: 'Explorer\'s Ring',
                     x: 5708,
                     y: 2409,
-                    color: 'yellow'
+                    color: 'yellow',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/1/14/Explorer\'s_ring_2.png'), aWiki('Explorer\'s ring')),
+                            p(text('Requires completing '), aWiki('medium Lumbridge & Draynor Diary'))
+                        );
+                    }
                 },
                 {
                     name: 'Lumbridge Home Teleport',
                     x: 6243,
                     y: 2632,
-                    color: 'aqua'
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/e/e2/Home_Teleport.png'), aWiki('Lumbridge Home Teleport')),
+                            p(text('30min cooldown'))
+                        );
+                    }
                 },
                 {
-                    name: 'Varrock Teleport (Spell)\n\nRequires 25 Magic',
+                    name: 'Varrock Teleport',
                     x: 6182,
                     y: 2000,
                     color: 'aqua',
@@ -157,100 +182,211 @@
                     }
                 },
                 {
+                    name: 'Varrock Teleport (Toggle-location)',
+                    x: 6036,
+                    y: 1866,
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/c/c5/Varrock_Teleport.png'), aWiki('Varrock Teleport'), text(' (Toggle-location)')),
+                            p(text('Requires completing '), aWiki('Medium Varrock Diary')),
+                            p(text('Requires 25 Magic')),
+                            p(runeReq('air', 3), runeReq('fire', 1), runeReq('law', 1))
+                        );
+                    }
+                },
+                {
                     name: 'Lumbridge Teleport',
                     x: 6212,
                     y: 2634,
-                    color: 'aqua'
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/f/f8/Lumbridge_Teleport.png'), aWiki('Lumbridge Teleport')),
+                            p(text('Requires 31 Magic')),
+                            p(runeReq('air', 3), runeReq('earth', 1), runeReq('law', 1))
+                        );
+                    }
                 },
                 {
                     name: 'Falador Teleport',
                     x: 5436,
                     y: 2148,
-                    color: 'aqua'
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/0/06/Falador_Teleport.png'), aWiki('Falador Teleport')),
+                            p(text('Requires 37 Magic')),
+                            p(runeReq('air', 3), runeReq('water', 1), runeReq('law', 1))
+                        );
+                    }
                 },
                 {
                     name: 'Teleport to House (Rimmington)',
                     x: 5400,
                     y: 2614,
-                    color: 'blue'
+                    color: 'blue',
+                    renderTooltip: () => teleToHouseTemplate('Rimmington')
                 },
                 {
                     name: 'Teleport to House (Taverley)',
                     x: 5215,
                     y: 1894,
-                    color: 'blue'
+                    color: 'blue',
+                    renderTooltip: () => teleToHouseTemplate('Taverley')
                 },
                 {
                     name: 'Teleport to House (Pollnivneach)',
                     x: 6561,
                     y: 3287,
-                    color: 'blue'
+                    color: 'blue',
+                    renderTooltip: () => teleToHouseTemplate('Pollnivneach')
                 },
                 {
                     name: 'Teleport to House (Yanille)',
                     x: 4176,
                     y: 2998,
-                    color: 'blue'
+                    color: 'blue',
+                    renderTooltip: () => teleToHouseTemplate('Yanille')
                 },
                 {
                     name: 'Teleport to House (Brimhaven)',
                     x: 4810,
                     y: 2756,
-                    color: 'blue'
+                    color: 'blue',
+                    renderTooltip: () => teleToHouseTemplate('Brimhaven')
                 },
                 {
                     name: 'Teleport to House (Hosidius)',
                     x: 1768,
                     y: 1736,
-                    color: 'blue'
+                    color: 'blue',
+                    renderTooltip: () => teleToHouseTemplate('Hosidius')
                 },
                 {
                     name: 'Teleport to House (Fremennik Province)',
                     x: 4553,
                     y: 1394,
-                    color: 'blue'
+                    color: 'blue',
+                    renderTooltip: () => teleToHouseTemplate('Fremennik Province')
                 },
                 {
                     name: 'Teleport to House (Prifddinas)',
                     x: 3183,
                     y: 2308,
-                    color: 'blue'
+                    color: 'blue',
+                    renderTooltip: () => teleToHouseTemplate('Prifddinas')
                 },
                 {
                     name: 'Camelot Teleport',
                     x: 4818,
                     y: 1862,
-                    color: 'aqua'
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/6/68/Camelot_Teleport.png'), aWiki('Camelot Teleport')),
+                            p(text('Requires 45 Magic')),
+                            p(runeReq('air', 5), runeReq('law', 1))
+                        );
+                    }
+                },
+                {
+                    name: 'Camelot Teleport (Toggle-location)',
+                    x: 4718,
+                    y: 1813,
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/6/68/Camelot_Teleport.png'), aWiki('Camelot Teleport'), text(' (Toggle-location)')),
+                            p(text('Requires completing '), aWiki('Hard Kandarin Diary')),
+                            p(text('Requires 45 Magic')),
+                            p(runeReq('air', 5), runeReq('law', 1))
+                        );
+                    }
                 },
                 {
                     name: 'Ardougne Teleport',
                     x: 4528,
                     y: 2366,
-                    color: 'aqua'
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/0/05/Ardougne_Teleport.png'), aWiki('Ardougne Teleport')),
+                            p(text('Requires completing '), aWiki('Plague City')),
+                            p(text('Requires 51 Magic')),
+                            p(runeReq('water', 2), runeReq('law', 2))
+                        );
+                    }
                 },
                 {
                     name: 'Watchtower Teleport',
                     x: 4186,
                     y: 2935,
-                    color: 'aqua'
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/9/91/Watchtower_Teleport.png'), aWiki('Watchtower Teleport')),
+                            p(text('Requires completing '), aWiki('Watchtower')),
+                            p(text('Requires 58 Magic')),
+                            p(runeReq('earth', 2), runeReq('law', 2))
+                        );
+                    }
+                },
+                {
+                    name: 'Watchtower Teleport (Toggle-location)',
+                    x: 4273,
+                    y: 3017,
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/9/91/Watchtower_Teleport.png'), aWiki('Watchtower Teleport'), text(' (Toggle-location)')),
+                            p(text('Requires completing '), aWiki('Hard Ardougne Diary')),
+                            p(text('Requires 58 Magic')),
+                            p(runeReq('earth', 2), runeReq('law', 2))
+                        );
+                    }
                 },
                 {
                     name: 'Trollheim Teleport',
                     x: 5220,
                     y: 1251,
-                    color: 'aqua'
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/4/41/Trollheim_Teleport.png'), aWiki('Trollheim Teleport')),
+                            p(text('Requires completing '), aWiki('Eadgar\'s Ruse')),
+                            p(text('Requires 61 Magic')),
+                            p(runeReq('fire', 2), runeReq('law', 2))
+                        );
+                    }
                 },
                 {
                     name: 'Ape Atoll Teleport',
                     x: 4942,
                     y: 3927,
-                    color: 'aqua'
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/7/76/Ape_Atoll_Teleport_(standard).png'), aWiki('Ape Atoll Teleport (standard)')),
+                            p(text('Requires part of '), aWiki('Recipe for Disaster')),
+                            p(text('Requires 74 Magic')),
+                            p(runeReq('fire', 2), runeReq('water', 2), runeReq('law', 2), runeReq('banana', 1))
+                        );
+                    }
                 },
                 {
-                    name: 'Kourend Teleport',
+                    name: 'Kourend Castle Teleport',
                     x: 1431,
                     y: 1268,
-                    color: 'aqua'
+                    color: 'aqua',
+                    renderTooltip: () => {
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/1/1b/Kourend_Castle_Teleport.png'), aWiki('Kourend Castle Teleport')),
+                            p(text('Requires reading '), aWiki('Transportation incantations')),
+                            p(text('Requires 69 Magic')),
+                            p(runeReq('fire', 5), runeReq('water', 4), runeReq('law', 2), runeReq('soul', 2))
+                        );
+                    }
                 },
                 {
                     name: 'Home Teleport',
