@@ -126,6 +126,7 @@
             function imgRune(rune) {
                 switch (rune.toLowerCase()) {
                     case 'air': return imgWiki('bf/Air_rune.png');
+                    case 'astral': return imgWiki('5e/Astral_rune.png');
                     case 'blood': return imgWiki('2a/Blood_rune.png');
                     case 'earth': return imgWiki('d2/Earth_rune.png');
                     case 'fire': return imgWiki('a2/Fire_rune.png');
@@ -142,6 +143,10 @@
 
             function reqAncientMagicks() {
                 return p(text('Requires '), aWiki('Ancient Magicks'), text(' spellbook'));
+            }
+
+            function reqLunar() {
+                return p(text('Requires '), aWiki('Lunar spells'), text(' spellbook'));
             }
 
             function reqMagic(magic) {
@@ -261,56 +266,56 @@
                     name: 'Teleport to House (Rimmington)',
                     x: 5400,
                     y: 2614,
-                    color: 'blue',
+                    color: 'white',
                     renderTooltip: () => teleToHouseTemplate('Rimmington')
                 },
                 {
                     name: 'Teleport to House (Taverley)',
                     x: 5215,
                     y: 1894,
-                    color: 'blue',
+                    color: 'white',
                     renderTooltip: () => teleToHouseTemplate('Taverley')
                 },
                 {
                     name: 'Teleport to House (Pollnivneach)',
                     x: 6561,
                     y: 3287,
-                    color: 'blue',
+                    color: 'white',
                     renderTooltip: () => teleToHouseTemplate('Pollnivneach')
                 },
                 {
                     name: 'Teleport to House (Yanille)',
                     x: 4176,
                     y: 2998,
-                    color: 'blue',
+                    color: 'white',
                     renderTooltip: () => teleToHouseTemplate('Yanille')
                 },
                 {
                     name: 'Teleport to House (Brimhaven)',
                     x: 4810,
                     y: 2756,
-                    color: 'blue',
+                    color: 'white',
                     renderTooltip: () => teleToHouseTemplate('Brimhaven')
                 },
                 {
                     name: 'Teleport to House (Hosidius)',
                     x: 1768,
                     y: 1736,
-                    color: 'blue',
+                    color: 'white',
                     renderTooltip: () => teleToHouseTemplate('Hosidius')
                 },
                 {
                     name: 'Teleport to House (Fremennik Province)',
                     x: 4553,
                     y: 1394,
-                    color: 'blue',
+                    color: 'white',
                     renderTooltip: () => teleToHouseTemplate('Fremennik Province')
                 },
                 {
                     name: 'Teleport to House (Prifddinas)',
                     x: 3183,
                     y: 2308,
-                    color: 'blue',
+                    color: 'white',
                     renderTooltip: () => teleToHouseTemplate('Prifddinas')
                 },
                 {
@@ -549,7 +554,134 @@
                             p(runeReq('water', 8), runeReq('law', 2))
                         );
                     }
-                }
+                },
+                {
+                    name: 'Lunar Home Teleport',
+                    x: 2881,
+                    y: 549,
+                    color: 'blue',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('e2/Home_Teleport.png'), aWiki('Lunar Home Teleport')),
+                            reqLunar(),
+                            p(text('10s to cast')),
+                            p(text('30min cooldown'))
+                        );
+                    }
+                },
+                {
+                    name: 'Moonclan Teleport',
+                    x: 2824,
+                    y: 545,
+                    color: 'blue',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('9d/Moonclan_Teleport.png'), aWiki('Moonclan Teleport')),
+                            reqLunar(),
+                            reqMagic(69),
+                            p(runeReq('earth', 2), runeReq('astral', 2), runeReq('law', 1))
+                        );
+                    }
+                },
+                {
+                    name: 'Ourania Teleport',
+                    x: 3931,
+                    y: 2535,
+                    color: 'blue',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('fb/Ourania_Teleport.png'), aWiki('Ourania Teleport')),
+                            reqLunar(),
+                            p(text('Requires speaking to '), aWiki('Baba Yaga')),
+                            reqMagic(71),
+                            p(runeReq('earth', 6), runeReq('astral', 2), runeReq('law', 1))
+                        );
+                    }
+                },
+                {
+                    name: 'Waterbirth Teleport',
+                    x: 4188,
+                    y: 1013,
+                    color: 'blue',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('41/Waterbirth_Teleport.png'), aWiki('Waterbirth Teleport')),
+                            reqLunar(),
+                            reqMagic(72),
+                            p(runeReq('water', 1), runeReq('astral', 2), runeReq('law', 1))
+                        );
+                    }
+                },
+                {
+                    name: 'Barbarian Teleport',
+                    x: 4168,
+                    y: 1583,
+                    color: 'blue',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('c3/Barbarian_Teleport.png'), aWiki('Barbarian Teleport')),
+                            reqLunar(),
+                            reqMagic(75),
+                            p(runeReq('fire', 3), runeReq('astral', 2), runeReq('law', 2))
+                        );
+                    }
+                },
+                {
+                    name: 'Khazard Teleport',
+                    x: 4422,
+                    y: 2770,
+                    color: 'blue',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('0c/Khazard_Teleport.png'), aWiki('Khazard Teleport')),
+                            reqLunar(),
+                            reqMagic(78),
+                            p(runeReq('water', 4), runeReq('astral', 2), runeReq('law', 2))
+                        );
+                    }
+                },
+                {
+                    name: 'Fishing Guild Teleport',
+                    x: 4379,
+                    y: 2111,
+                    color: 'blue',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('e8/Fishing_Guild_Teleport.png'), aWiki('Fishing Guild Teleport')),
+                            reqLunar(),
+                            reqMagic(85),
+                            p(runeReq('water', 10), runeReq('astral', 3), runeReq('law', 3))
+                        );
+                    }
+                },
+                {
+                    name: 'Catherby Teleport',
+                    x: 4963,
+                    y: 1978,
+                    color: 'blue',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('c3/Catherby_Teleport.png'), aWiki('Catherby Teleport')),
+                            reqLunar(),
+                            reqMagic(87),
+                            p(runeReq('water', 10), runeReq('astral', 3), runeReq('law', 3))
+                        );
+                    }
+                },
+                {
+                    name: 'Ice Plateau Teleport',
+                    x: 5460,
+                    y: 492,
+                    color: 'blue',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('25/Ice_Plateau_Teleport.png'), aWiki('Ice Plateau Teleport')),
+                            reqLunar(),
+                            reqMagic(89),
+                            p(runeReq('water', 8), runeReq('astral', 3), runeReq('law', 3))
+                        );
+                    }
+                },
             ];
 
             function draw() {

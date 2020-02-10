@@ -17,8 +17,9 @@ Click and drag with the mouse to move around. Scroll the mouse wheel to zoom in/
 Legend:
 
 * aqua dots are for [standard spells](https://oldschool.runescape.wiki/w/Standard_spells)
-* blue dots are for [Teleport to House](https://oldschool.runescape.wiki/w/Teleport_to_House) targets, depending on where your house is
+* white dots are for [Teleport to House](https://oldschool.runescape.wiki/w/Teleport_to_House) targets, depending on where your house is
 * purple dots are for [Ancient Magicks](https://oldschool.runescape.wiki/w/Ancient_Magicks)
+* blue dots are for [Lunar spells](https://oldschool.runescape.wiki/w/Lunar_spells)
 * yellow dots are for items
 
 ## Credits
