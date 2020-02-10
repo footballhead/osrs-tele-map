@@ -60,7 +60,7 @@
             var prevMouseX = 0;
             var prevMouseY = 0;
 
-            function makeAnchor(link, text) {
+            function a(link, text) {
                 var anchor = document.createElement('a');
                 anchor.href = link;
                 // TODO: anchor.target
@@ -68,22 +68,32 @@
                 return anchor;
             }
 
-            function makeWikiAnchor(text) {
+            function aWiki(text) {
                 const wikiBase = 'https://oldschool.runescape.wiki/w/';
-                return makeAnchor(wikiBase + text, text);
+                return a(wikiBase + text, text);
             }
 
-            function makeImg(src) {
+            function text(txt) {
+                return document.createTextNode(txt);
+            }
+
+            function img(src) {
                 var img = document.createElement('img');
                 img.src = src;
                 // TODO: alt text
                 return img;
             }
 
-            function makeP(text) {
+            function p(...children) {
                 var p = document.createElement('p');
-                p.appendChild(document.createTextNode(text));
+                children.forEach(child => p.appendChild(child));
                 return p;
+            }
+
+            function div(...children) {
+                var div = document.createElement('div');
+                children.forEach(child => div.appendChild(child));
+                return div;
             }
 
             /* https://oldschool.runescape.wiki/w/Teleportation */
@@ -94,15 +104,10 @@
                     y: 1732,
                     color: 'yellow',
                     renderTooltip: () => {
-                        var div = document.createElement('div');
-                        var title = document.createElement('p');
-
-                        title.appendChild(makeImg('https://oldschool.runescape.wiki/images/b/bc/Ectophial.png'));
-                        title.appendChild(makeWikiAnchor('Ectophial'));
-                        div.appendChild(title);
-
-                        div.appendChild(makeP('Requires completing Ghosts Ahoy'));
-                        return div;
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/b/bc/Ectophial.png'), aWiki('Ectophial')),
+                            p(text('Requires completing '), aWiki('Ghosts Ahoy'))
+                        );
                     }
                 },
                 {
@@ -123,12 +128,10 @@
                     y: 2000,
                     color: 'aqua',
                     renderTooltip: () => {
-                        var div = document.createElement('div');
-                        var title = document.createElement('p');
-                        title.appendChild(makeWikiAnchor('Varrock Teleport'))
-                        div.appendChild(title);
-                        div.appendChild(makeP('Requires 25 magic'))
-                        return div;
+                        return div(
+                            p(img('https://oldschool.runescape.wiki/images/c/c5/Varrock_Teleport.png'), aWiki('Varrock Teleport')),
+                            p(text('Requires 25 magic'))
+                        );
                     }
                 },
                 {
@@ -325,6 +328,7 @@
                 prevMouseX = e.clientX;
                 prevMouseY = e.clientY;
 
+                // Log clicks so adding new POIs is easier
                 console.log("clickX=" + ((mapX - e.clientX) / -mapScale) + " clickY=" + ((mapY - e.clientY) / -mapScale));
             });
             canvas.addEventListener('mouseup', e => isDragging = false);
@@ -352,13 +356,11 @@
 
                             /* https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript */
                             if ('renderTooltip' in item) {
-                                console.log(dialog.firstChild);
                                 dialog.firstChild.remove();
                                 dialog.insertBefore(item.renderTooltip(), dialog.firstChild);
                             } else {
-                                console.log(dialog.firstChild);
                                 dialog.firstChild.remove();
-                                dialog.insertBefore(makeP(item.name), dialog.firstChild);
+                                dialog.insertBefore(p(text(item.name)), dialog.firstChild);
                             }
                         }
                     })
