@@ -63,17 +63,16 @@
             var prevMouseX = 0;
             var prevMouseY = 0;
 
+            //
+            // HTML DOM helpers
+            //
+
             function a(link, text) {
                 var anchor = document.createElement('a');
                 anchor.href = link;
                 // TODO: anchor.target
                 anchor.appendChild(document.createTextNode(text));
                 return anchor;
-            }
-
-            function aWiki(text) {
-                const wikiBase = 'https://oldschool.runescape.wiki/w/';
-                return a(wikiBase + text, text);
             }
 
             function text(txt) {
@@ -85,22 +84,6 @@
                 img.src = src;
                 // TODO: alt text
                 return img;
-            }
-
-            function imgRune(rune) {
-                switch (rune.toLowerCase()) {
-                    case 'air': return img('https://oldschool.runescape.wiki/images/b/bf/Air_rune.png');
-                    case 'earth': return img('https://oldschool.runescape.wiki/images/d/d2/Earth_rune.png');
-                    case 'fire': return img('https://oldschool.runescape.wiki/images/a/a2/Fire_rune.png');
-                    case 'law': return img('https://oldschool.runescape.wiki/images/f/f6/Law_rune.png');
-                    case 'soul': return img('https://oldschool.runescape.wiki/images/9/9b/Soul_rune.png');
-                    case 'water': return img('https://oldschool.runescape.wiki/images/d/d1/Water_rune.png');
-                    case 'banana': return img('https://oldschool.runescape.wiki/images/6/69/Banana.png');
-                }
-            }
-
-            function runeReq(rune, amt) {
-                return span(imgRune(rune), text('x' + amt + ' '));
             }
 
             function span(...children) {
@@ -121,14 +104,66 @@
                 return div;
             }
 
+            //
+            // Helpers to tap into OSRS wiki
+            //
+
+            function aWiki(text) {
+                const wikiBase = 'https://oldschool.runescape.wiki/w/';
+                return a(wikiBase + text, text);
+            }
+
+            function imgWiki(src) {
+                // My suspicion is that the image is stored at a location based on the hash of the file contents.
+                // The first directory after wikiBase is the first hex of the hash (0-9a-f) for organization.
+                // Then the subdirectory is the first and second hex of the hash.
+                // Then the file name follows.
+                const wikiBase = 'https://oldschool.runescape.wiki/images/';
+                // TODO: alt text
+                return img(wikiBase + src.slice(0, 1) + '/' + src);
+            }
+
+            function imgRune(rune) {
+                switch (rune.toLowerCase()) {
+                    case 'air': return imgWiki('bf/Air_rune.png');
+                    case 'blood': return imgWiki('2a/Blood_rune.png');
+                    case 'earth': return imgWiki('d2/Earth_rune.png');
+                    case 'fire': return imgWiki('a2/Fire_rune.png');
+                    case 'law': return imgWiki('f6/Law_rune.png');
+                    case 'soul': return imgWiki('9b/Soul_rune.png');
+                    case 'water': return imgWiki('d1/Water_rune.png');
+                    case 'banana': return imgWiki('69/Banana.png');
+                }
+            }
+
+            //
+            // Templates, to make tooltip code more readable and consistent
+            //
+
+            function reqAncientMagicks() {
+                return p(text('Requires '), aWiki('Ancient Magicks'), text(' spellbook'));
+            }
+
+            function reqMagic(magic) {
+                return p(text('Requires ' + magic + ' Magic'));
+            }
+
+            function runeReq(rune, amt) {
+                return span(imgRune(rune), text('x' + amt + ' '));
+            }
+
             function teleToHouseTemplate(loc) {
                 return div(
-                    p(img('https://oldschool.runescape.wiki/images/8/88/Teleport_to_House.png'), aWiki('Teleport to House')),
+                    p(imgWiki('88/Teleport_to_House.png'), aWiki('Teleport to House')),
                     p(text('Requires a house in '), a('https://oldschool.runescape.wiki/w/Player-owned_house', loc)),
-                    p(text('Requires 40 Magic')),
+                    reqMagic(40),
                     p(runeReq('air', 1), runeReq('earth', 1), runeReq('law', 1))
                 );
             }
+
+            //
+            // Points of Interest
+            //
 
             /* https://oldschool.runescape.wiki/w/Teleportation */
             var poi = [
@@ -139,7 +174,7 @@
                     color: 'yellow',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/b/bc/Ectophial.png'), aWiki('Ectophial')),
+                            p(imgWiki('bc/Ectophial.png'), aWiki('Ectophial')),
                             p(text('Requires completing '), aWiki('Ghosts Ahoy'))
                         );
                     }
@@ -151,7 +186,7 @@
                     color: 'yellow',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/1/14/Explorer\'s_ring_2.png'), aWiki('Explorer\'s ring')),
+                            p(imgWiki('14/Explorer\'s_ring_2.png'), aWiki('Explorer\'s ring')),
                             p(text('Requires completing '), aWiki('medium Lumbridge & Draynor Diary'))
                         );
                     }
@@ -163,7 +198,8 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/e/e2/Home_Teleport.png'), aWiki('Lumbridge Home Teleport')),
+                            p(imgWiki('e2/Home_Teleport.png'), aWiki('Lumbridge Home Teleport')),
+                            p(text('10s to cast')),
                             p(text('30min cooldown'))
                         );
                     }
@@ -175,8 +211,8 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/c/c5/Varrock_Teleport.png'), aWiki('Varrock Teleport')),
-                            p(text('Requires 25 Magic')),
+                            p(imgWiki('c5/Varrock_Teleport.png'), aWiki('Varrock Teleport')),
+                            reqMagic(25),
                             p(runeReq('air', 3), runeReq('fire', 1), runeReq('law', 1))
                         );
                     }
@@ -188,9 +224,9 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/c/c5/Varrock_Teleport.png'), aWiki('Varrock Teleport'), text(' (Toggle-location)')),
+                            p(imgWiki('c5/Varrock_Teleport.png'), aWiki('Varrock Teleport'), text(' (Toggle-location)')),
                             p(text('Requires completing '), aWiki('Medium Varrock Diary')),
-                            p(text('Requires 25 Magic')),
+                            reqMagic(25),
                             p(runeReq('air', 3), runeReq('fire', 1), runeReq('law', 1))
                         );
                     }
@@ -202,8 +238,8 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/f/f8/Lumbridge_Teleport.png'), aWiki('Lumbridge Teleport')),
-                            p(text('Requires 31 Magic')),
+                            p(imgWiki('f8/Lumbridge_Teleport.png'), aWiki('Lumbridge Teleport')),
+                            reqMagic(31),
                             p(runeReq('air', 3), runeReq('earth', 1), runeReq('law', 1))
                         );
                     }
@@ -215,8 +251,8 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/0/06/Falador_Teleport.png'), aWiki('Falador Teleport')),
-                            p(text('Requires 37 Magic')),
+                            p(imgWiki('06/Falador_Teleport.png'), aWiki('Falador Teleport')),
+                            reqMagic(37),
                             p(runeReq('air', 3), runeReq('water', 1), runeReq('law', 1))
                         );
                     }
@@ -284,8 +320,8 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/6/68/Camelot_Teleport.png'), aWiki('Camelot Teleport')),
-                            p(text('Requires 45 Magic')),
+                            p(imgWiki('68/Camelot_Teleport.png'), aWiki('Camelot Teleport')),
+                            reqMagic(45),
                             p(runeReq('air', 5), runeReq('law', 1))
                         );
                     }
@@ -297,9 +333,9 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/6/68/Camelot_Teleport.png'), aWiki('Camelot Teleport'), text(' (Toggle-location)')),
+                            p(imgWiki('68/Camelot_Teleport.png'), aWiki('Camelot Teleport'), text(' (Toggle-location)')),
                             p(text('Requires completing '), aWiki('Hard Kandarin Diary')),
-                            p(text('Requires 45 Magic')),
+                            reqMagic(45),
                             p(runeReq('air', 5), runeReq('law', 1))
                         );
                     }
@@ -311,9 +347,9 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/0/05/Ardougne_Teleport.png'), aWiki('Ardougne Teleport')),
+                            p(imgWiki('05/Ardougne_Teleport.png'), aWiki('Ardougne Teleport')),
                             p(text('Requires completing '), aWiki('Plague City')),
-                            p(text('Requires 51 Magic')),
+                            reqMagic(51),
                             p(runeReq('water', 2), runeReq('law', 2))
                         );
                     }
@@ -325,9 +361,9 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/9/91/Watchtower_Teleport.png'), aWiki('Watchtower Teleport')),
+                            p(imgWiki('91/Watchtower_Teleport.png'), aWiki('Watchtower Teleport')),
                             p(text('Requires completing '), aWiki('Watchtower')),
-                            p(text('Requires 58 Magic')),
+                            reqMagic(58),
                             p(runeReq('earth', 2), runeReq('law', 2))
                         );
                     }
@@ -339,9 +375,9 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/9/91/Watchtower_Teleport.png'), aWiki('Watchtower Teleport'), text(' (Toggle-location)')),
+                            p(imgWiki('91/Watchtower_Teleport.png'), aWiki('Watchtower Teleport'), text(' (Toggle-location)')),
                             p(text('Requires completing '), aWiki('Hard Ardougne Diary')),
-                            p(text('Requires 58 Magic')),
+                            reqMagic(58),
                             p(runeReq('earth', 2), runeReq('law', 2))
                         );
                     }
@@ -353,9 +389,9 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/4/41/Trollheim_Teleport.png'), aWiki('Trollheim Teleport')),
+                            p(imgWiki('41/Trollheim_Teleport.png'), aWiki('Trollheim Teleport')),
                             p(text('Requires completing '), aWiki('Eadgar\'s Ruse')),
-                            p(text('Requires 61 Magic')),
+                            reqMagic(61),
                             p(runeReq('fire', 2), runeReq('law', 2))
                         );
                     }
@@ -367,9 +403,9 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/7/76/Ape_Atoll_Teleport_(standard).png'), aWiki('Ape Atoll Teleport (standard)')),
+                            p(imgWiki('76/Ape_Atoll_Teleport_(standard).png'), aWiki('Ape Atoll Teleport (standard)')),
                             p(text('Requires part of '), aWiki('Recipe for Disaster')),
-                            p(text('Requires 74 Magic')),
+                            reqMagic(74),
                             p(runeReq('fire', 2), runeReq('water', 2), runeReq('law', 2), runeReq('banana', 1))
                         );
                     }
@@ -381,66 +417,138 @@
                     color: 'aqua',
                     renderTooltip: () => {
                         return div(
-                            p(img('https://oldschool.runescape.wiki/images/1/1b/Kourend_Castle_Teleport.png'), aWiki('Kourend Castle Teleport')),
+                            p(imgWiki('1b/Kourend_Castle_Teleport.png'), aWiki('Kourend Castle Teleport')),
                             p(text('Requires reading '), aWiki('Transportation incantations')),
-                            p(text('Requires 69 Magic')),
+                            reqMagic(69),
                             p(runeReq('fire', 5), runeReq('water', 4), runeReq('law', 2), runeReq('soul', 2))
                         );
                     }
                 },
                 {
-                    name: 'Home Teleport',
+                    name: 'Edgeville Home Teleport',
                     x: 5822,
                     y: 1832,
-                    color: 'purple'
+                    color: 'purple',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('e2/Home_Teleport.png'), aWiki('Edgeville Home Teleport')),
+                            reqAncientMagicks(),
+                            p(text('10s to cast')),
+                            p(text('30min cooldown'))
+                        );
+                    }
                 },
                 {
-                    name: 'Paddewwa Telport',
+                    name: 'Paddewwa Teleport',
                     x: 5828,
                     y: 1873,
-                    color: 'purple'
+                    color: 'purple',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('05/Paddewwa_Teleport.png'), aWiki('Paddewwa Teleport')),
+                            reqAncientMagicks(),
+                            reqMagic(54),
+                            p(runeReq('air', 1), runeReq('fire', 1), runeReq('law', 2))
+                        );
+                    }
                 },
                 {
                     name: 'Senntisten Teleport',
                     x: 6606,
                     y: 2061,
-                    color: 'purple'
+                    color: 'purple',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('94/Senntisten_Teleport.png'), aWiki('Senntisten Teleport')),
+                            reqAncientMagicks(),
+                            reqMagic(60),
+                            p(runeReq('law', 2), runeReq('soul', 1))
+                        );
+                    }
                 },
                 {
                     name: 'Kharyll Teleport',
                     x: 7068,
                     y: 1775,
-                    color: 'purple'
+                    color: 'purple',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('b0/Kharyrll_Teleport.png'), aWiki('Kharyll Teleport')),
+                            reqAncientMagicks(),
+                            reqMagic(66),
+                            p(runeReq('blood', 1), runeReq('law', 2))
+                        );
+                    }
                 },
                 {
                     name: 'Lassar Teleport',
                     x: 5564,
                     y: 1859,
-                    color: 'purple'
+                    color: 'purple',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('40/Lassar_Teleport.png'), aWiki('Lassar Teleport')),
+                            reqAncientMagicks(),
+                            reqMagic(72),
+                            p(runeReq('water', 4), runeReq('law', 2))
+                        );
+                    }
                 },
                 {
                     name: 'Dareeyak Teleport',
                     x: 5465,
                     y: 1205,
-                    color: 'purple'
+                    color: 'purple',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('11/Dareeyak_Teleport.png'), aWiki('Dareeyak Teleport')),
+                            reqAncientMagicks(),
+                            reqMagic(78),
+                            p(runeReq('air', 2), runeReq('fire', 3), runeReq('law', 2))
+                        );
+                    }
                 },
                 {
                     name: 'Carrallangar Teleport',
                     x: 6015,
                     y: 1295,
-                    color: 'purple'
+                    color: 'purple',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('1e/Carrallangar_Teleport.png'), aWiki('Carrallangar Teleport')),
+                            reqAncientMagicks(),
+                            reqMagic(84),
+                            p(runeReq('law', 2), runeReq('soul', 2))
+                        );
+                    }
                 },
                 {
-                    name: 'Demonic Ruins',
+                    name: 'Annakarl Teleport',
                     x: 6413,
                     y: 629,
-                    color: 'purple'
+                    color: 'purple',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('62/Annakarl_Teleport.png'), aWiki('Annakarl Teleport')),
+                            reqAncientMagicks(),
+                            reqMagic(90),
+                            p(runeReq('blood', 2), runeReq('law', 2))
+                        );
+                    }
                 },
                 {
                     name: 'Ghorrock Teleport',
                     x: 5458,
                     y: 670,
-                    color: 'purple'
+                    color: 'purple',
+                    renderTooltip: () => {
+                        return div(
+                            p(imgWiki('46/Ghorrock_Teleport.png'), aWiki('Ghorrock Teleport')),
+                            reqAncientMagicks(),
+                            reqMagic(96),
+                            p(runeReq('water', 8), runeReq('law', 2))
+                        );
+                    }
                 }
             ];
 
@@ -486,7 +594,7 @@
                 prevMouseX = e.clientX;
                 prevMouseY = e.clientY;
 
-                // Log clicks so adding new POIs is easier
+                // Print clicks so adding new POIs is easier
                 console.log("clickX=" + ((mapX - e.clientX) / -mapScale) + " clickY=" + ((mapY - e.clientY) / -mapScale));
             });
             canvas.addEventListener('mouseup', e => isDragging = false);
@@ -512,13 +620,12 @@
                             dialog.style.left = e.clientX + 'px';
                             dialog.style.display = 'block';
 
-                            /* https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript */
                             if ('renderTooltip' in item) {
                                 dialog.firstChild.remove();
                                 dialog.insertBefore(item.renderTooltip(), dialog.firstChild);
                             } else {
                                 dialog.firstChild.remove();
-                                dialog.insertBefore(p(text(item.name)), dialog.firstChild);
+                                dialog.insertBefore(p(aWiki(item.name)), dialog.firstChild);
                             }
                         }
                     })
@@ -540,6 +647,9 @@
 
                 draw();
             });
+
+            // TODO: Touch events
+            // https://developer.mozilla.org/en-US/docs/Web/API/Touch_events
         })();
     </script>
 </body>
