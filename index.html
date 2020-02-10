@@ -244,6 +244,10 @@
                 if (mapImgLoaded) {
                     // TODO: Profile whether it makes sense to only draw what the user sees VS everything
                     ctx.drawImage(mapImg, mapX, mapY, mapImg.width * mapScale, mapImg.height * mapScale);
+                } else {
+                    ctx.fillStyle = 'white';
+                    ctx.font = '50px serif';
+                    ctx.fillText('Loading...', 10, 60);
                 }
 
                 poi.forEach(item => {
