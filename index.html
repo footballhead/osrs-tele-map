@@ -307,13 +307,16 @@
             canvas.addEventListener('wheel', e => {
                 var oldMapScale = mapScale;
 
-                mapScale += scaleIncrements * -e.deltaY;
+                // https://stackoverflow.com/questions/5527601/normalizing-mousewheel-speed-across-browsers
+                var deltaY = Math.sign(e.deltaY);
+
+                mapScale += scaleIncrements * -deltaY;
                 if (mapScale <= scaleMin) {
                     mapScale = scaleMin;
                 }
 
-                mapX -= ((mapX - e.clientX) / oldMapScale) * (scaleIncrements * e.deltaY);
-                mapY -= ((mapY - e.clientY) / oldMapScale) * (scaleIncrements * e.deltaY);
+                mapX -= ((mapX - e.clientX) / oldMapScale) * (scaleIncrements * deltaY);
+                mapY -= ((mapY - e.clientY) / oldMapScale) * (scaleIncrements * deltaY);
 
                 draw();
             });
