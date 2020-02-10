@@ -8,7 +8,11 @@ View online at https://footballhead.github.io/osrs-tele-map/
 
 * A modern browser
 
-That's right, no frameworks, no node, no react, just a browser. Although JSX might be handy in the future...
+## Usage
+
+Loading `index.html` in your browser (or visit https://footballhead.github.io/osrs-tele-map/).
+
+Click and drag with the mouse to move around. Scroll the mouse wheel to zoom in/out. Hover over a colored dot to get details. Tooltips can be manually closed using the Close button.
 
 ## Credits
 
