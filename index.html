@@ -31,6 +31,9 @@
     <canvas id="mainCanvas">Interactive map of Oldschool Runescape teleportation locations.</canvas>
 
     <img id="mapImg" src="Old_School_RuneScape_world_map.png" style="display: none;">
+    <img id="runeFire" src="https://oldschool.runescape.wiki/images/a/a2/Fire_rune.png" style="display: none;">
+    <img id="runeAir" src="https://oldschool.runescape.wiki/images/b/bf/Air_rune.png" style="display: none;">
+    <img id="runeLaw" src="https://oldschool.runescape.wiki/images/f/f6/Law_rune.png" style="display: none;">
 
     <!-- it is important that there is no space between the div and p elements so that dialog.firstChild is not some random text -->
     <div id="dialog"><p>Hello world</p>
@@ -84,6 +87,24 @@
                 return img;
             }
 
+            function imgRune(rune) {
+                switch (rune.toLowerCase()) {
+                    case 'air': return img('https://oldschool.runescape.wiki/images/b/bf/Air_rune.png');
+                    case 'fire': return img('https://oldschool.runescape.wiki/images/a/a2/Fire_rune.png');
+                    case 'law': return img('https://oldschool.runescape.wiki/images/f/f6/Law_rune.png');
+                }
+            }
+
+            function runeReq(rune, amt) {
+                return span(imgRune(rune), text('x' + amt + ' '));
+            }
+
+            function span(...children) {
+                var span = document.createElement('span');
+                children.forEach(child => span.appendChild(child));
+                return span;
+            }
+
             function p(...children) {
                 var p = document.createElement('p');
                 children.forEach(child => p.appendChild(child));
@@ -130,7 +151,8 @@
                     renderTooltip: () => {
                         return div(
                             p(img('https://oldschool.runescape.wiki/images/c/c5/Varrock_Teleport.png'), aWiki('Varrock Teleport')),
-                            p(text('Requires 25 magic'))
+                            p(text('Requires 25 Magic')),
+                            p(runeReq('air', 3), runeReq('fire', 1), runeReq('law', 1))
                         );
                     }
                 },
