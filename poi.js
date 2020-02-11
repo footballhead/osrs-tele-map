@@ -520,6 +520,7 @@ var poi = [
         renderTooltip: () => {
             return div(
                 p(imgWiki('e2/Home_Teleport.png'), aWiki('Arceuus Home Teleport')),
+                reqArceuus(),
                 p(text('10s to cast')),
                 p(text('30min cooldown'))
             );
