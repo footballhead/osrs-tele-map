@@ -823,4 +823,85 @@ var poi = [
             )
         }
     },
+    {
+        name: 'bip',
+        x: 6770,
+        y: 2310,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('bip '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'biq',
+        x: 6290,
+        y: 3003,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('biq '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'bis',
+        x: 4450,
+        y: 2482,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('bis '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    // TODO bjr
+    {
+        name: 'bjs',
+        x: 2987,
+        y: 3079,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('bjs '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'bkp',
+        x: 3696,
+        y: 3175,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('bkp '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    // TODO: bkq
+    {
+        name: 'bkr',
+        x: 6948,
+        y: 1987,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('bkr '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    // TODO: bks
+    // TODO: blp
+    {
+        name: 'blr',
+        x: 4762,
+        y: 2231,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('blr '), aWiki('Fairy ring'))
+            )
+        }
+    },
 ];
