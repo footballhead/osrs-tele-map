@@ -1015,4 +1015,96 @@ var poi = [
             )
         }
     },
+    // TODO: dip
+    // TODO: diq (teleport to house)
+    // TODO: dir
+    {
+        name: 'dis',
+        x: 5873,
+        y: 2840,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('dis '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'djp',
+        x: 4517,
+        y: 2594,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('djp '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'djr',
+        x: 901,
+        y: 1308,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('djr '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'dkp',
+        x: 5241,
+        y: 2949,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('dkp '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'dkr',
+        x: 5923,
+        y: 1799,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('dkr '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'dks',
+        x: 4775,
+        y: 1123,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('dks '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'dlq',
+        x: 6810,
+        y: 3232,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('dlq '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'dlr',
+        x: 3182,
+        y: 2983,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('dlr '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    // TODO: dls
 ];
