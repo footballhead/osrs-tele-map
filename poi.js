@@ -1,5 +1,5 @@
 /// @file poi.js
-/// @brief Creates an array called POI with subobjects {name, x, y, color, renderTooltip}. Requires tooltip.js
+/// @brief Creates an array called `poi` with subobjects {name, x, y, color, renderTooltip}. Requires tooltip.js
 
 var poi = [
     {
