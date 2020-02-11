@@ -111,13 +111,8 @@
                             dialog.style.left = e.clientX + 'px';
                             dialog.style.display = 'block';
 
-                            if ('renderTooltip' in item) {
-                                dialog.firstChild.remove();
-                                dialog.insertBefore(item.renderTooltip(), dialog.firstChild);
-                            } else {
-                                dialog.firstChild.remove();
-                                dialog.insertBefore(p(aWiki(item.name)), dialog.firstChild);
-                            }
+                            dialog.firstChild.remove();
+                            dialog.insertBefore(item.renderTooltip(), dialog.firstChild);
                         }
                     })
                 }
