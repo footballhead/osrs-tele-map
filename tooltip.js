@@ -2,15 +2,15 @@
 /// @brief Templates for tooltip writing. Requires wikidom.js
 
 function reqAncientMagicks() {
-    return p(text('Requires '), aWiki('Ancient Magicks'), text(' spellbook'));
+    return p(text('Requires '), imgWiki('18/Ancient_spellbook.png'), aWiki('Ancient Magicks'), text(' spellbook'));
 }
 
 function reqLunar() {
-    return p(text('Requires '), aWiki('Lunar spells'), text(' spellbook'));
+    return p(text('Requires '), imgWiki('8f/Lunar_spellbook.png'), aWiki('Lunar spellbook'));
 }
 
 function reqArceuus() {
-    return p(text('Requires '), aWiki('Arceuus spellbook'));
+    return p(text('Requires '), imgWiki('11/Arceuus_spellbook.png'), aWiki('Arceuus spellbook'));
 }
 
 function reqMagic(magic) {
