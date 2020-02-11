@@ -904,4 +904,115 @@ var poi = [
             )
         }
     },
+    {
+        name: 'cip',
+        x: 4081,
+        y: 627,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('cip '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'ciq',
+        x: 4124,
+        y: 2899,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('ciq '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'cir',
+        x: 454,
+        y: 999,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('cir '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'cis',
+        x: 1457,
+        y: 683,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('cis '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'cjr',
+        x: 4655,
+        y: 1554,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('cjr '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    // TODO: ckp
+    {
+        name: 'ckr',
+        x: 4945,
+        y: 3270,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('ckr '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'cks',
+        x: 6882,
+        y: 1871,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('cks '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'clp',
+        x: 5791,
+        y: 2661,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('clp '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'clr',
+        x: 4757,
+        y: 4069,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('clr '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'cls',
+        x: 4589,
+        y: 3037,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('cls '), aWiki('Fairy ring'))
+            )
+        }
+    },
 ];
