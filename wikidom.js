@@ -34,6 +34,8 @@ function imgRune(rune) {
         case 'earth': return imgWiki('d2/Earth_rune.png');
         case 'fire': return imgWiki('a2/Fire_rune.png');
         case 'law': return imgWiki('f6/Law_rune.png');
+        case 'mind': return imgWiki('99/Mind_rune.png');
+        case 'nature': return imgWiki('88/Nature_rune.png')
         case 'soul': return imgWiki('9b/Soul_rune.png');
         case 'water': return imgWiki('d1/Water_rune.png');
         case 'banana': return imgWiki('69/Banana.png');

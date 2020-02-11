@@ -9,12 +9,26 @@ function reqLunar() {
     return p(text('Requires '), aWiki('Lunar spells'), text(' spellbook'));
 }
 
+function reqArceuus() {
+    return p(text('Requires '), aWiki('Arceuus spellbook'));
+}
+
 function reqMagic(magic) {
     return p(text('Requires ' + magic + ' Magic'));
 }
 
 function runeReq(rune, amt) {
     return span(imgRune(rune), text('x' + amt + ' '));
+}
+
+function respawnTeleTemplate(loc) {
+    return div(
+        p(imgWiki('b9/Respawn_Teleport.png'), aWiki('Respawn Teleport')),
+        reqArceuus(),
+        p(text('Requires '), a('https://oldschool.runescape.wiki/w/Spawning#Respawn_point', 'respawn point'), text(' in ' + loc)),
+        reqMagic(34),
+        p(runeReq('law', 1), runeReq('soul', 1))
+    );
 }
 
 function teleToHouseTemplate(loc) {

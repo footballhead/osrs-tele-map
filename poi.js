@@ -512,4 +512,213 @@ var poi = [
             );
         }
     },
+    {
+        name: 'Arceuus Home Teleport',
+        x: 1676,
+        y: 638,
+        color: 'springgreen',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('e2/Home_Teleport.png'), aWiki('Arceuus Home Teleport')),
+                p(text('10s to cast')),
+                p(text('30min cooldown'))
+            );
+        }
+    },
+    {
+        name: 'Lumbridge Graveyard Teleport',
+        x: 6278,
+        y: 2699,
+        color: 'springgreen',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('0e/Lumbridge_Graveyard_Teleport.png'), aWiki('Lumbridge Graveyard Teleport')),
+                reqArceuus(),
+                reqMagic(6),
+                p(runeReq('earth', 2), runeReq('law', 1))
+            );
+        }
+    },
+    {
+        name: 'Draynor Manor Teleport',
+        x: 5873,
+        y: 2261,
+        color: 'springgreen',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('72/Draynor_Manor_Teleport.png'), aWiki('Draynor Manor Teleport')),
+                reqArceuus(),
+                reqMagic(17),
+                p(runeReq('earth', 1), runeReq('water', 1), runeReq('law', 1))
+            );
+        }
+    },
+    {
+        name: 'Battlefront Teleport',
+        x: 592,
+        y: 1056,
+        color: 'springgreen',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('97/Battlefront_Teleport.png'), aWiki('Battlefront Teleport')),
+                reqArceuus(),
+                reqMagic(23),
+                p(runeReq('earth', 1), runeReq('fire', 1), runeReq('law', 1))
+            );
+        }
+    },
+    {
+        name: 'Mind Altar Teleport',
+        x: 5478,
+        y: 1779,
+        color: 'springgreen',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('a8/Mind_Altar_Teleport.png'), aWiki('Mind Altar Teleport')),
+                reqArceuus(),
+                reqMagic(28),
+                p(runeReq('mind', 2), runeReq('law', 1))
+            );
+        }
+    },
+    {
+        name: 'Respawn Teleport (Lumbridge)',
+        x: 6238,
+        y: 2650,
+        color: 'lawngreen',
+        renderTooltip: () => respawnTeleTemplate('Lumbridge'),
+    },
+    {
+        name: 'Respawn Teleport (Falador)',
+        x: 5448,
+        y: 2260,
+        color: 'lawngreen',
+        renderTooltip: () => respawnTeleTemplate('Falador'),
+    },
+    {
+        name: 'Respawn Teleport (Camelot)',
+        x: 4836,
+        y: 1859,
+        color: 'lawngreen',
+        renderTooltip: () => respawnTeleTemplate('Camelot'),
+    },
+    {
+        name: 'Respawn Teleport (Edgeville)',
+        x: 5827,
+        y: 1849,
+        color: 'lawngreen',
+        renderTooltip: () => respawnTeleTemplate('Edgeville'),
+    },
+    // Unsure if Ardougne counts as a valid Respawn Teleport
+    {
+        name: 'Respawn Teleport (Prifddinas)',
+        x: 3271,
+        y: 2289,
+        color: 'lawngreen',
+        renderTooltip: () => respawnTeleTemplate('Prifddinas'),
+    },
+    {
+        name: 'Salve Graveyard Teleport',
+        x: 6843,
+        y: 1897,
+        color: 'springgreen',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('82/Salve_Graveyard_Teleport.png'), aWiki('Salve Graveyard Teleport')),
+                reqArceuus(),
+                p(text('Requires completing '), aWiki('Priest in Peril')),
+                reqMagic(40),
+                p(runeReq('law', 1), runeReq('soul', 2))
+            );
+        }
+    },
+    {
+        name: 'Fenkenstrain\'s Castle Teleport',
+        x: 7188,
+        y: 1699,
+        color: 'springgreen',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('49/Fenkenstrain\'s_Castle_Teleport.png'), aWiki('Fenkenstrain\'s Castle Teleport')),
+                reqArceuus(),
+                p(text('Requires completing '), aWiki('Priest in Peril')), // This is a guess based on the others
+                reqMagic(48),
+                p(runeReq('earth', 1), runeReq('law', 1), runeReq('soul', 1))
+            );
+        }
+    },
+    {
+        name: 'West Ardougne Teleport',
+        x: 4126,
+        y: 2370,
+        color: 'springgreen',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('4f/West_Ardougne_Teleport.png'), aWiki('West Ardougne Teleport')),
+                reqArceuus(),
+                p(text('Requires completing '), aWiki('Biohazard')),
+                reqMagic(61),
+                p(runeReq('law', 2), runeReq('soul', 2))
+            );
+        }
+    },
+    {
+        name: 'Harmony Island Teleport',
+        x: 7918,
+        y: 3812,
+        color: 'springgreen',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('f3/Harmony_Island_Teleport.png'), aWiki('Harmony Island Teleport')),
+                reqArceuus(),
+                p(text('Requires completing '), aWiki('The Great Brain Robbery')),
+                reqMagic(65),
+                p(runeReq('law', 1), runeReq('nature', 1), runeReq('soul', 1))
+            );
+        }
+    },
+    {
+        name: 'Cemetery Teleport',
+        x: 5474,
+        y: 1030,
+        color: 'springgreen',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('19/Cemetery_Teleport.png'), aWiki('Cemetery Teleport')),
+                reqArceuus(),
+                reqMagic(71),
+                p(runeReq('blood', 1), runeReq('law', 1), runeReq('soul', 1))
+            );
+        }
+    },
+    {
+        name: 'Barrows Teleport',
+        x: 7240,
+        y: 2364,
+        color: 'springgreen',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('e1/Barrows_Teleport.png'), aWiki('Barrows Teleport')),
+                reqArceuus(),
+                p(text('Requires completing '), aWiki('Priest in Peril')),
+                reqMagic(83),
+                p(runeReq('blood', 1), runeReq('law', 2), runeReq('soul', 2))
+            );
+        }
+    },
+    {
+        name: 'Ape Atoll Teleport (Arceuus)',
+        x: 4830,
+        y: 4138,
+        color: 'springgreen',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('f3/Ape_Atoll_Teleport_(Arceuus).png'), aWiki('Ape Atoll Teleport (Arceuus)')),
+                reqArceuus(),
+                p(text('Requires completing '), aWiki('Monkey Madness I'), text(' and training from '), aWiki('Daero')),
+                reqMagic(90),
+                p(runeReq('blood', 2), runeReq('law', 2), runeReq('soul', 2))
+            );
+        }
+    }
 ];
