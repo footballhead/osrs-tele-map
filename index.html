@@ -33,8 +33,6 @@
             var dialog = document.getElementById('dialog');
             var dialogCloseButton = document.getElementById('dialogCloseButton');
 
-            var mapImgLoaded = false;
-
             var isDragging = false;
             var mapX = 0;
             var mapY = 0;
@@ -47,7 +45,7 @@
                 ctx.fillStyle = 'black';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                if (mapImgLoaded) {
+                if (mapImg.complete) {
                     // TODO: Profile whether it makes sense to only draw what the user sees VS everything
                     ctx.drawImage(mapImg, mapX, mapY, mapImg.width * mapScale, mapImg.height * mapScale);
                 } else {
@@ -73,10 +71,7 @@
             window.addEventListener('resize', onResize, false);
             onResize();
 
-            mapImg.addEventListener('load', e => {
-                mapImgLoaded = true;
-                draw();
-            });
+            mapImg.addEventListener('load', e => draw());
 
             dialogCloseButton.addEventListener('click', e => dialog.style.display = 'none');
 
