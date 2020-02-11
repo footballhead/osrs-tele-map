@@ -721,5 +721,106 @@ var poi = [
                 p(runeReq('blood', 2), runeReq('law', 2), runeReq('soul', 2))
             );
         }
-    }
+    },
+    {
+        name: 'aiq',
+        x: 5525,
+        y: 2949,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('aiq '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'air',
+        x: 4644,
+        y: 2537,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('air '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    // TODO: ajq
+    {
+        name: 'ajr',
+        x: 4882,
+        y: 1440,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('ajr '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'ajs',
+        x: 4045,
+        y: 597,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('ajs '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'akq',
+        x: 3500,
+        y: 1437,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('akq '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'aks',
+        x: 4254,
+        y: 3412,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('aks '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'alp',
+        x: 4050,
+        y: 1372,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('alp '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    {
+        name: 'alq',
+        x: 7340,
+        y: 1798,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('alq '), aWiki('Fairy ring'))
+            )
+        }
+    },
+    // TODO alr
+    {
+        name: 'als',
+        x: 4474,
+        y: 1796,
+        color: 'red',
+        renderTooltip: () => {
+            return div(
+                p(text('als '), aWiki('Fairy ring'))
+            )
+        }
+    },
 ];
