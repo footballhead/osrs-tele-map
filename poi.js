@@ -138,6 +138,63 @@ var poi = [
         }
     },
     {
+        name: 'Games necklace (Barbarian Outpost)',
+        x: 4100,
+        y: 1579,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('41/Games_necklace.png'), aWiki('Games necklace'), text(' (Barbarian Outpost)'))
+            );
+        }
+    },
+    {
+        name: 'Games necklace (Burthrope Games Room)',
+        x: 5240,
+        y: 1646,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('41/Games_necklace.png'), aWiki('Games necklace'), text(' (Burthrope Games Room)'))
+            );
+        }
+    },
+    {
+        name: 'Games necklace (Corporeal Beast)',
+        x: 6151,
+        y: 1244,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('41/Games_necklace.png'), aWiki('Games necklace'), text(' (Corporeal Beast)'))
+            );
+        }
+    },
+    {
+        name: 'Games necklace (Tears of Guthix)',
+        x: 6048,
+        y: 2769,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('41/Games_necklace.png'), aWiki('Games necklace'), text(' (Tears of Guthix)')),
+                p(text('Requires completing '), aWiki('Tears of Guthix'))
+            );
+        }
+    },
+    {
+        name: 'Games necklace (Wintertodt Camp)',
+        x: 1438,
+        y: 454,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('41/Games_necklace.png'), aWiki('Games necklace'), text(' (Wintertodt Camp)')),
+                p(text('Requires visiting '), aWiki('Zeah'), text(' once before'))
+            );
+        }
+    },
+    {
         name: 'Lumbridge Home Teleport',
         x: 6243,
         y: 2632,
