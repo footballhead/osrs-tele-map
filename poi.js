@@ -261,6 +261,31 @@ var poi = [
         }
     },
     {
+        name: 'Ardougne cloak (Monastery)',
+        x: 4363,
+        y: 2634,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('ca/Ardougne_cloak_1.png'), aWiki('Ardougne cloak')),
+                p(text('Requires completing '), aWiki('Easy Ardougne Diary'))
+            );
+        }
+    },
+    {
+        name: 'Ardougne cloak (Farming patch)',
+        x: 4536,
+        y: 2160,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('d6/Ardougne_cloak_2.png'), aWiki('Ardougne cloak')),
+                p(text('Requires completing '), aWiki('Medium Ardougne Diary')),
+                p(text('Limit 3 per day (5 if completed '), aWiki('Hard Ardougne Diary'), text('). Unlimited if completed '), aWiki('Elite Ardougne Diary'), text('.'))
+            );
+        }
+    },
+    {
         name: 'Lumbridge Home Teleport',
         x: 6243,
         y: 2632,
