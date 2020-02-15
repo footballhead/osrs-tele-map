@@ -27,6 +27,50 @@ var poi = [
         }
     },
     {
+        name: 'Amulet of Glory (Edgeville)',
+        x: 5811,
+        y: 1818,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('f0/Amulet_of_glory(4).png'), aWiki('Amulet of Glory'), text(' (Edgeville)'))
+            );
+        }
+    },
+    {
+        name: 'Amulet of Glory (Karamja)',
+        x: 5299,
+        y: 2763,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('f0/Amulet_of_glory(4).png'), aWiki('Amulet of Glory'), text(' (Karamja)'))
+            );
+        }
+    },
+    {
+        name: 'Amulet of Glory (Draynor Village)',
+        x: 5855,
+        y: 2540,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('f0/Amulet_of_glory(4).png'), aWiki('Amulet of Glory'), text(' (Draynor Village)'))
+            );
+        }
+    },
+    {
+        name: 'Amulet of Glory (Al Kharid)',
+        x: 6422,
+        y: 2796,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('f0/Amulet_of_glory(4).png'), aWiki('Amulet of Glory'), text(' (Al Kharid)'))
+            );
+        }
+    },
+    {
         name: 'Lumbridge Home Teleport',
         x: 6243,
         y: 2632,
