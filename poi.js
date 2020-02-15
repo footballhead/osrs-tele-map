@@ -228,6 +228,39 @@ var poi = [
         }
     },
     {
+        name: 'Ring of dueling (Duel Arena)',
+        x: 6473,
+        y: 2581,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('bd/Ring_of_dueling.png'), aWiki('Ring of dueling'), text(' (Duel Arena)'))
+            );
+        }
+    },
+    {
+        name: 'Ring of dueling (Castle Wars)',
+        x: 3868,
+        y: 3011,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('bd/Ring_of_dueling.png'), aWiki('Ring of dueling'), text(' (Castle Wars)'))
+            );
+        }
+    },
+    {
+        name: 'Ring of dueling (Clan Wars)',
+        x: 6695,
+        y: 2772,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('bd/Ring_of_dueling.png'), aWiki('Ring of dueling'), text(' (Clan Wars)'))
+            );
+        }
+    },
+    {
         name: 'Lumbridge Home Teleport',
         x: 6243,
         y: 2632,
