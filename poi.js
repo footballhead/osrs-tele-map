@@ -71,6 +71,73 @@ var poi = [
         }
     },
     {
+        name: 'Skills necklace (Fishing Guild)',
+        x: 4365,
+        y: 2108,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('06/Skills_necklace.png'), aWiki('Skills necklace'), text(' (Fishing Guild)'))
+            );
+        }
+    },
+    {
+        name: 'Skills necklace (Mining Guild)',
+        x: 5725,
+        y: 2154,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('06/Skills_necklace.png'), aWiki('Skills necklace'), text(' (Mining Guild)')),
+                p(text('(Actual destination is in the '), aWiki('Dwarven Mines'), text(')'))
+            );
+        }
+    },
+    {
+        name: 'Skills necklace (Crafting Guild)',
+        x: 5345,
+        y: 2404,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('06/Skills_necklace.png'), aWiki('Skills necklace'), text(' (Crafting Guild)'))
+            );
+        }
+    },
+    {
+        name: 'Skills necklace (Cooking Guild)',
+        x: 5973,
+        y: 1961,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('06/Skills_necklace.png'), aWiki('Skills necklace'), text(' (Cooking Guild)'))
+            );
+        }
+    },
+    {
+        name: 'Skills necklace (Woodcutting Guild)',
+        x: 1522,
+        y: 1772,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('06/Skills_necklace.png'), aWiki('Skills necklace'), text(' (Woodcutting Guild)'))
+            );
+        }
+    },
+    {
+        name: 'Skills necklace (Farming Guild)',
+        x: 289,
+        y: 1121,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('06/Skills_necklace.png'), aWiki('Skills necklace'), text(' (Farming Guild)'))
+            );
+        }
+    },
+    {
         name: 'Lumbridge Home Teleport',
         x: 6243,
         y: 2632,
