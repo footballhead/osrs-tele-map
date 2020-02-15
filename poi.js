@@ -195,6 +195,39 @@ var poi = [
         }
     },
     {
+        name: 'Necklace of passage (Wizards\' Tower)',
+        x: 5886,
+        y: 2760,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('62/Necklace_of_passage.png'), aWiki('Necklace of passage'), text(' (Wizards\' Tower)'))
+            );
+        }
+    },
+    {
+        name: 'Necklace of passage (Outpost)',
+        x: 3854,
+        y: 2244,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('62/Necklace_of_passage.png'), aWiki('Necklace of passage'), text(' (Outpost)'))
+            );
+        }
+    },
+    {
+        name: 'Necklace of passage (Desert Eagle)',
+        x: 6774,
+        y: 2824,
+        color: 'yellow',
+        renderTooltip: () => {
+            return div(
+                p(imgWiki('62/Necklace_of_passage.png'), aWiki('Necklace of passage'), text(' (Desert Eagle)'))
+            );
+        }
+    },
+    {
         name: 'Lumbridge Home Teleport',
         x: 6243,
         y: 2632,
