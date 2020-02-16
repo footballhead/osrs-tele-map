@@ -28,8 +28,8 @@ var poi = [
     },
     {
         name: 'Amulet of Glory (Edgeville)',
-        x: 5811,
-        y: 1818,
+        x: 5806,
+        y: 1800,
         color: 'yellow',
         renderTooltip: () => {
             return div(
