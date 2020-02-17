@@ -1203,7 +1203,8 @@ var poi = [
         color: 'red',
         renderTooltip: () => {
             return div(
-                p(text('cis '), aWiki('Fairy ring'))
+                p(text('cis '), aWiki('Fairy ring')),
+                p(text('Requires paying 80 000 coins to '), aWiki('Trossa'))
             )
         }
     },
